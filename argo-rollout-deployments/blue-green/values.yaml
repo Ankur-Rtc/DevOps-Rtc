@@ -6,7 +6,7 @@ replicaCount: 4
 
 image:
   repository: public.ecr.aws/nginx/nginx
-  tag: 1.22
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:

@@ -12,9 +12,9 @@ with the Helm package manager you can perform Progressive Delivery deployments w
 To deploy the first version of your application:
 
 ```
-git clone https://github.com/argoproj/argo-rollouts.git
-cd argo-rollouts/examples
-helm install example ./helm-blue-green/
+git clone https://github.com/Ankur-Rtc/DevOps-Rtc.git
+cd argo-rollout-deployments/
+helm install example ./canary/
 ```
 
 Your application will be deployed and exposed via the `example-helm-guestbook` service
@@ -24,21 +24,7 @@ Your application will be deployed and exposed via the `example-helm-guestbook` s
 To deploy the updated version using a Blue/Green strategy:
 
 ```
-helm upgrade example ./helm-blue-green/  --set image.tag=0.2
+helm upgrade example ./canary/  --set image.tag=1.22
 ```
 
-Now, two versions will exist in your cluster (and each one has an associated service)
-
-```
-kubectl-argo-rollouts get rollout example-helm-guestbook
-```
-
-## Promoting the rollout
-
-To advance the rollout and make the new version stable
-
-```
-kubectl-argo-rollouts promote example-helm-guestbook
-```
-
-This promotes container image `ks-guestbook-demo:0.2` to `green` status and `Rollout` deletes old replica which runs `ks-guestbook-demo:0.1`.
+It will start the upgrade process and will follow the steps defined in strategy. This will promotes container image `nginx:latest` to `green` status and `Rollout` deletes old replica which runs `nginx:1.22`.
